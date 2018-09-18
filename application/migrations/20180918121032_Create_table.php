@@ -1,14 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Create_table extends  CI_Migration {
+class Migration_Create_table extends  CI_Migration {
     
     public function __construct() 
     {
         parent::__construct();
     }
     
-    public function up() {
+    public function up()
+    {
         $this->dbforge->add_field(array(
                         'uq_number' => array(
                                 'type' => 'INT',
@@ -46,6 +47,7 @@ class Create_table extends  CI_Migration {
                 ));
                 $this->dbforge->add_key('id', TRUE);
                 $this->dbforge->create_table('member');
+                echo 'memberを作成しました。'.PHP_EOL;
                 
         $this->dbforge->add_field(array(
                         'p_number' => array(
@@ -85,9 +87,12 @@ class Create_table extends  CI_Migration {
                 ));
                 $this->dbforge->add_key('p_number', TRUE);
                 $this->dbforge->create_table('post');
-                $this->dbforge->add_column('post',[
-                'CONSTRAINT post_fk FOREIGN KEY(id) member (id) ON DELETE CASCADE',
-                ]);
+                echo 'postを作成しました。'.PHP_EOL;
+                $sql = <<<SQL
+                        ALTER TABLE post ADD CONSTRAINT post_fk FOREIGN KEY (id) REFERENCES member(id) ON DELETE CASCADE
+SQL;
+                $this->db->query($sql);
+                echo 'postの外部キーを追加しました。'.PHP_EOL;
                 
         $this->dbforge->add_field(array(
                         'id' => array(
@@ -107,15 +112,22 @@ class Create_table extends  CI_Migration {
                 ));
                 $this->dbforge->add_key('id', TRUE);
                 $this->dbforge->create_table('friends');
-                $this->dbforge->add_column('friends',[
-                'CONSTRAINT friends_fk FOREIGN KEY(id) member (id) ON DELETE CASCADE',
-                ]);
+                echo 'frinendsを作成しました。'.PHP_EOL;
+                $sql = <<<SQL
+                        ALTER TABLE friends ADD CONSTRAINT friends_fk FOREIGN KEY (id) REFERENCES member(id) ON DELETE CASCADE
+SQL;
+                $this->db->query($sql);
+                echo 'friebdsの外部キーを追加しました。'.PHP_EOL;
+
     }
     
     public function down()
-        {
-                $this->dbforge->drop_table('member');
-                $this->dbforge->drop_table('post');
-                $this->dbforge->drop_table('friends');
-        }
+    {
+            $this->dbforge->drop_table('friends');
+            echo 'frinendsを削除しました。'.PHP_EOL;
+            $this->dbforge->drop_table('post');
+            echo 'postを削除しました。'.PHP_EOL;
+            $this->dbforge->drop_table('member');
+            echo 'memberを削除しました。'.PHP_EOL;
+    }
 }

@@ -18,7 +18,7 @@ class Migrate extends CI_Controller {
         if($this->migration->current()){
             log_message('error', 'Migration Success.');
         } else {
-            log_message('error', $this->migrantion->error_string());
+            log_message('error', $this->migration->error_string());
         }
     }
     
@@ -27,7 +27,7 @@ class Migrate extends CI_Controller {
         if($this->migration->version($version)){
             log_message('error', 'Migration Success.');
         } else {
-            log_message('error', $this->migrantion->error_string());
+            log_message('error', $this->migration->error_string());
         }
     }
     
@@ -36,7 +36,7 @@ class Migrate extends CI_Controller {
         if($this->migration->latest()){
             log_message('error', 'Migration Success.');
         } else {
-            log_message('error', $this->migrantion->error_string());
+            log_message('error', $this->migration->error_string());
         }
     }
 }
