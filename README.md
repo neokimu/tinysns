@@ -1,0 +1,2 @@
+# tinysns
+SNSsite
