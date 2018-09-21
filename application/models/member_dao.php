@@ -39,16 +39,21 @@ class Member_dao extends CI_Model
     
     public function join($id, $password, $email, $m_photo, $profile, $m_category){
         
-        $sql = "select * from member where id= '$id' and password= '$password'";
-        $result = $this->db->query($sql)->row_array();
-        
-        $this->uq_number = $uq_number;
-        $this->id = $id;
-        $this->password = $password;
-        $this->email = $email;
-        $this->m_photo = $m_photo;
-        $this->profile = $profile;
-        $this->m_category = $m_category;
+        $data = array(
+        'uq_number' => null,
+        'id' => $id,
+        'password' => $password,
+        'email' => $email,
+        'm_photo' => $m_photo,
+        'profile' => $profile,
+        'm_category' => $m_category
+        );
+
+        if($this->db->insert('member', $data)){
+            echo 'seccess';
+        } else {
+            echo 'fail';
+        }       
     }
 
 

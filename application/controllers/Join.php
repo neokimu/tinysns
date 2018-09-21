@@ -7,6 +7,7 @@ class Join extends CI_Controller {
         parent::__construct();
         $this->load->library('form_validation');   
         $this->load->model('member_dao');
+        $this->load->helper('url');
     }
     
     public function index()
@@ -23,9 +24,12 @@ class Join extends CI_Controller {
         $this->form_validation->set_rules('m_category', 'm_category', 'required');
         
         if($this->form_validation->run() == false){
-            $this->load->view('join_view');    
+            $this->load->view('join_view'); 
         } else {       
-            $this->load->view('sns_view');           
+            $this->member_dao->join($this->input->post('id'), $this->input->post('password'), 
+                                    $this->input->post('email'), $this->input->post('m_photo'),
+                                    $this->input->post('profile'), $this->input->post('m_category'));            
+            redirect('/');           
         }       
     }
 }

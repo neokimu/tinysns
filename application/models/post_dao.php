@@ -18,6 +18,26 @@ class Post_dao extends CI_Model
     private $like_num;
     private $p_date;
     
+    public function write($id, $title, $p_photo, $p_text, $p_category, $p_date) {
+        
+        $data = array(
+        'p_number' => null,
+        'id' => $id,
+        'title' => $title,
+        'p_photo' => $p_photo,
+        'p_text' => $p_text,
+        'p_category' => $p_category,
+        'like_num' => null,
+        'p_date' => $p_date 
+        );
+
+        if($this->db->insert('post', $data)){
+            echo 'seccess';
+        } else {
+            echo 'fail';
+        }
+    }
+    
     public function get_p_number($p_number){
         return $this->p_number;
     }

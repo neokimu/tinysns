@@ -40,7 +40,7 @@ class Migration_Create_table extends  CI_Migration {
                                 'constraint' => '500',
                                 'null' => TRUE
                         ),
-                        'm_categoty' => array(
+                        'm_category' => array(
                                 'type' => 'char',
                                 'constraint' => '8'
                         )
@@ -79,6 +79,7 @@ class Migration_Create_table extends  CI_Migration {
                         'like_num' => array(
                                 'type' => 'int',
                                 'constraint' => '11',
+                                'null' => TRUE,
                                 'default' => '0'
                         ),
                         'p_date' => array(
