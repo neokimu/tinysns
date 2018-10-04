@@ -38,7 +38,8 @@
             </div>
         </div>
     </div>    
-    <div class="content pure-u-1 pure-u-md-3-4">                     
-           
+    <div>  
+        <img src= "<?= base_url()?>/assets/img/welcome.jpg" width=100% height=100%>
+    <div>      
     </body>
 </html>
