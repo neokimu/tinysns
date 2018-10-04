@@ -29,12 +29,12 @@
         <textarea name="profile" rows="5" cols="25"></textarea>
         <br>
         <label for="m_category">category</label>    
-        <input type="checkbox" name="m_category" value="1">travel 
-        <input type="checkbox" name="m_category" value="2">music 
-        <input type="checkbox" name="m_category" value="3">social   
-        <input type="checkbox" name="m_category" value="4">technology  
-        <input type="checkbox" name="m_category" value="5">food  
-        <input type="checkbox" name="m_category" value="6">shoping
+        <input type="checkbox" name="m_category[]" value="1">travel 
+        <input type="checkbox" name="m_category[]" value="2">music 
+        <input type="checkbox" name="m_category[]" value="3">social   
+        <input type="checkbox" name="m_category[]" value="4">technology  
+        <input type="checkbox" name="m_category[]" value="5">food  
+        <input type="checkbox" name="m_category[]" value="6">shopping
         <br>
         <input type="submit" value="join" />
         

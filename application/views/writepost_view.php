@@ -23,7 +23,7 @@
                         <a class="pure-button" href="main">posts view</a>
                     </li>
                     <li class="nav-item">
-                        <a class="pure-button" href="mypage">taehyung's Page</a>
+                        <a class="pure-button" href="mypage"><?=$this->session->userdata('id')?>'s Page</a>
                     </li>
                     <li class="nav-item">
                         <br>
@@ -47,12 +47,12 @@
             </script>
             <br>
             <label for="p_category">category</label>    
-            <input type="checkbox" name="p_category" value="1">travel 
-            <input type="checkbox" name="p_category" value="2">music 
-            <input type="checkbox" name="p_category" value="3">social   
-            <input type="checkbox" name="p_category" value="4">technology  
-            <input type="checkbox" name="p_category" value="5">food  
-            <input type="checkbox" name="p_category" value="6">shoping
+            <input type="checkbox" name="p_category[]" value="1">travel 
+            <input type="checkbox" name="p_category[]" value="2">music 
+            <input type="checkbox" name="p_category[]" value="3">social   
+            <input type="checkbox" name="p_category[]" value="4">technology  
+            <input type="checkbox" name="p_category[]" value="5">food  
+            <input type="checkbox" name="p_category[]" value="6">shoping
             <br><br>
             <input type="submit" value="submit">
         </form>       
