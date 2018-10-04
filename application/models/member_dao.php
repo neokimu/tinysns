@@ -8,109 +8,48 @@
  * @property MEMBER_DB
  */
 class Member_dao extends CI_Model
-{
-    private $uq_number;
-    private $id;
-    private $password;
-    private $email;
-    private $m_photo;
-    private $profile;
-    private $m_category;
-
-    public function login($id, $password){
-        
-        $sql = "select * from member where id= '$id' and password= '$password'";
-        $result = $this->db->query($sql)->row_array();
+{    
+    protected $uq_number;
+    protected $id;
+    protected $password;
+    protected $email;
+    protected $m_photo;
+    protected $profile;
+    protected $m_category;
+    
+    /**
+     * 登録しているユーザかどうかを確認
+     *
+     * @param $id, $password
+     *
+     * @return bool
+     */
+    public function login($id, $password)
+    {        
+        $sql = "SELECT * FROM member WHERE id= ? AND password= ?";
+        $result = $this->db->query($sql, array($id, $password))->row_array();
               
-        if($result !=null) {
-            
-            $this->uq_number = $result['uq_number'];
-            $this->id = $result['id'];
-            $this->password = $result['password'];
-            $this->email = $result['email'];
-            $this->m_photo = $result['m_photo'];
-            $this->profile = $result['profile'];
-            $this->m_category = $result['m_category'];
-            
+        if ($result != NULL)
+        {   
+            return $result;
+        } 
+    }   
+    
+    /**
+     * ユーザ登録をする
+     *
+     * @param array $join_array [id, password, email, m_photo, profile, m_category]
+     *
+     * @return bool
+     */
+    public function join($join_array){
+        
+        $sql = "INSERT INTO member VALUES (null, ?, ?, ?, ?, ?, ?)";
+        $result = $this->db->query($sql, $join_array);
+              
+        if($result != NULL) {    
             return TRUE;                
         } 
-        return FALSE;    
+        return FALSE; 
     }
-    
-    public function join($id, $password, $email, $m_photo, $profile, $m_category){
-        
-        $data = array(
-        'uq_number' => null,
-        'id' => $id,
-        'password' => $password,
-        'email' => $email,
-        'm_photo' => $m_photo,
-        'profile' => $profile,
-        'm_category' => $m_category
-        );
-
-        if($this->db->insert('member', $data)){
-            echo 'seccess';
-        } else {
-            echo 'fail';
-        }       
-    }
-
-
-    public function get_uq_number($uq_number){
-        return $this->uq_number;
-    }
-
-    public function set_uq_number($uq_number){
-        $this->uq_number = $uq_number;
-    }
-    
-    public function get_id($id){
-        return $this->id;
-    }
-
-    public function set_id($id){
-        $this->id = $id;
-    }
-    
-    public function get_password($password){
-        return $this->password;
-    }
-
-    public function set_password($password){
-        $this->password = $password;
-    }
-    
-    public function get_email($email) {
-        $this->email;
-    }
-    
-    public function set_email($email) {
-        $this->email = $email;
-    }
-    
-    public function get_m_photo($m_photo) {
-        $this->m_photo;
-    }
-    
-    public function set_m_photo($m_photo) {
-        $this->m_photo = $m_photo;
-    }
-    
-    public function get_profile($profile) {
-        $this->profile;
-    }
-    
-    public function set_profile($profile) {
-        $this->profile = $profile;
-    }
-    
-    public function get_m_category($m_category) {
-        $this->m_category;
-    }
-    
-    public function set_m_categoy($m_category) {
-        $this->m_category = $m_category;
-    }
-
 }

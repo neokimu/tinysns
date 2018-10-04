@@ -9,96 +9,74 @@
  */
 class Post_dao extends CI_Model
 {
-    private $p_number;
-    private $id;
-    private $title;
-    private $p_photo;
-    private $p_text;
-    private $p_category;
-    private $like_num;
-    private $p_date;
+    protected $p_number;
+    protected $id;
+    protected $title;
+    protected $p_photo;
+    protected $p_text;
+    protected $p_category;
+    protected $like_num;
+    protected $p_date;
     
-    public function write($id, $title, $p_photo, $p_text, $p_category, $p_date) {
-        
-        $data = array(
-        'p_number' => null,
-        'id' => $id,
-        'title' => $title,
-        'p_photo' => $p_photo,
-        'p_text' => $p_text,
-        'p_category' => $p_category,
-        'like_num' => null,
-        'p_date' => $p_date 
-        );
+    /**
+     * postの中でユーザのカテゴリーを含まれているpost習得（時間順）
+     *
+     * @param $m_category
+     *
+     * @return array $result
+     */
+    public function view($m_category)
+    {                 
+        $result = null;
 
-        if($this->db->insert('post', $data)){
-            echo 'seccess';
-        } else {
-            echo 'fail';
+        $sql = "SELECT * FROM post WHERE p_category REGEXP ? ORDER BY p_number DESC";
+        
+        $query = $this->db->query($sql, $m_category);
+
+        if ($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            
+            return $result;
         }
     }
     
-    public function get_p_number($p_number){
-        return $this->p_number;
-    }
+    /**
+     * ユーザが作成したpostを習得（時間順）
+     *
+     * @param $id
+     *
+     * @return array $result
+     */
+    public function mypost($id)
+    {                 
+        $result = null;
+        $sql = "select * from post where id= ? order by p_number DESC";
+        $query = $this->db->query($sql, $id);
 
-    public function set_p_number($p_number){
-        $this->p_number = $p_number;
+        if ($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            
+            return $result;
+        }
     }
     
-    public function get_id($id){
-        return $this->id;
-    }
-
-    public function set_id($id){
-        $this->id = $id;
-    }
-    
-    public function get_title($title){
-        return $this->title;
-    }
-
-    public function set_title($title){
-        $this->title = $title;
-    }
-    
-    public function get_p_photo($p_photo) {
-        $this->p_photo;
-    }
-    
-    public function set_p_photo($p_photo) {
-        $this->p_photo = $p_photo;
-    }
-    
-    public function get_p_text($p_text) {
-        $this->p_text;
-    }
-    
-    public function set_p_text($p_text) {
-        $this->p_text = $p_text;
-    }
-    
-    public function get_p_category($p_category) {
-        $this->p_category;
-    }
-    
-    public function set_p_category($p_category) {
-        $this->p_category = $p_category;
-    }
-    
-    public function get_like_num($like_num) {
-        $this->like_num;
-    }
-    
-    public function set_like_num($like_num) {
-        $this->like_num = $like_num;
-    }
-    
-    public function get_p_date($p_date) {
-        $this->p_date;
-    }
-    
-    public function set_p_date($p_date) {
-        $this->p_date = $p_date;
+    /**
+     * ユーザが作成したpostをデータベースに登録
+     *
+     * @param array $post_array [id, title, p_photo, p_text, p_category, p_date]
+     *
+     * @return bool
+     */
+    public function write($post_array) 
+    {
+        $sql = "INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, null, ?)";
+        $result = $this->db->query($sql, $post_array);
+              
+        if($result != NULL) {    
+            return TRUE;                
+        }   
+        return FALSE;
     }
 }

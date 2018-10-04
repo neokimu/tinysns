@@ -9,30 +9,51 @@
  */
 class Friends_dao extends CI_Model
 {
-    private $id;
-    private $request_id;
-    private $freiend_id;
+    protected $id;
+    protected $request_id;
+    protected $freiend_id;
     
-    public function get_uq_numer($id){
-        return $this->id;
-    }
+    /**
+     * 友達の申し込む習得
+     *
+     * @param $id
+     *
+     * @return array $result
+     */
+    public function request($id)
+    {
+        
+        $result = null;
+        $query = $this->db->query("select id, m_photo, profile from member where id ="
+                                  . "(select request_id from friends where id = '$id')");
 
-    public function set_uq_numer($id){
-        $this->id = $id;
+        if ($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            
+            return $result;
+        }          
     }
     
-    public function get_request_id($request_id){
-        return $this->request_id;
-    }
+    /**
+     * 登録されている友達の目録を習得
+     *
+     * @param $id
+     *
+     * @return array $result
+     */
+    public function friends($id)
+    {
+        
+        $result = null;
+        $query = $this->db->query("select id, email, m_photo, profile from member where id ="
+                                  . "(select friends_id from friends where id = '$id')");
 
-    public function set_request_id($request_id){
-        $this->request_id = $request_id;
-    }
-    public function get_freiend_id($freiend_id){
-        return $this->freiend_id;
-    }
-
-    public function set_freiend_id($freiend_id){
-        $this->freiend_id = $freiend_id;
+        if ($query->num_rows() > 0)
+        {
+            $result = $query->result_array();
+            
+            return $result;
+        }          
     }
 }
