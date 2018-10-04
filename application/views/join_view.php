@@ -7,23 +7,23 @@
     </head>
     <body>
         <h1>join</h1>
-        <?php echo validation_errors(); ?>
-    <form method="post" action="join/register">
+        <?=validation_errors()?>
+        <?=form_open_multipart(base_url().'join/join_validation')?>
         
         <label for="id">id</label>    
-        <input type="text" id="id" name="id" value="<?php echo set_value('id'); ?>"  placeholder="id">
+        <input type="text" id="id" name="id" value="<?=set_value('id')?>"  placeholder="id">
         <br>
-        <label for="password">password</label> 
-        <input type="password" id="password" name="password" value="<?php echo set_value('password'); ?>"   placeholder="password">
+        <label for="password">password</label>
+        <input type="password" id="password" name="password" value="<?=set_value('password')?>"   placeholder="password">
         <br>
         <label for="re_password">password_check</label>
-        <input type="password" id="re_password" name="re_password" value="<?php echo set_value('re_password'); ?>"   placeholder="password_check">
+        <input type="password" id="re_password" name="re_password" value="<?=set_value('re_password')?>"   placeholder="password_check">
         <br>
         <label for="email">e-mail</label>
-        <input type="text" id="email" name="email" value="<?php echo set_value('email'); ?>" placeholder="email">
+        <input type="text" id="email" name="email" value="<?=set_value('email')?>" placeholder="email">
         <br>
-        <label for="p_photo">profile_photo</label>
-        <input type="file" id="p_photo" name="p_photo" value="p_photo" placeholder="p_photo">
+        <label for="m_photo">profile_photo</label>
+        <input type="file" id="m_photo" name="m_photo" value="m_photo" placeholder="m_photo">
         <br>
         <label for="profile">profile</label>     
         <textarea name="profile" rows="5" cols="25"></textarea>
@@ -36,8 +36,7 @@
         <input type="checkbox" name="m_category[]" value="5">food  
         <input type="checkbox" name="m_category[]" value="6">shopping
         <br>
-        <input type="submit" value="join" />
-        
+        <input type="submit" value="join">        
     </form>  
     </body>
 </html>
