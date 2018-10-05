@@ -45,13 +45,15 @@
                         <h2 class="post-title"><?=$this->data[$i]['title']?></h2>
 
                         <p class="post-meta">
-                            By <a class="post-author" href="#"><?=$this->data[$i]['id']?></a>&nbsp;&nbsp;<?=$this->data[$i]['p_date']?>
+                            By <a class="post-author" href="#"><?=$this->data[$i]['id']?></a>  
+                            <a class="post-category post-category-js" href="#"><?=$this->data[$i]['like_num']?></a>
+                            <a class="post-category"><?=$this->data[$i]['p_date']?></a>
                         </p>
                     </header>
                     <div class="post-description">
                         <div class="post-images pure-g">
                             <div class="pure-u-1 pure-u-md-2-3">                              
-                                <img class="pure-img-responsive" src="<?= base_url()?>/assets/img/p_photo/<?=$this->data[$i]['p_photo']?>">
+                                <img class="pure-img-responsive" src="<?= base_url()?>/assets/img/<?=$this->data[$i]['p_photo']?>">
                                 <p><?=$this->data[$i]['p_text']?></p>
                             </div>
                         </div>
