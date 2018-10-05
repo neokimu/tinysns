@@ -24,12 +24,14 @@ CREATE TABLE post (
     id varchar(20) NOT NULL,
     title varchar(100) NOT NULL,
     p_photo varchar(100),
+    m_photo varchar(100),
     p_text varchar(500)NOT NULL,
     p_category char(6) NOT NULL,
     like_num int(11) DEFAULT 0,
     p_date datetime NOT NULL,
     PRIMARY KEY (p_number),
     CONSTRAINT post_fk FOREIGN KEY (id) REFERENCES member (id) ON DELETE CASCADE
+    CONSTRAINT post_fk_2 FOREIGN KEY (m_photo) REFERENCES member (m_photo) ON DELETE CASCADE
 );
 
 CREATE TABLE friends (   
@@ -54,4 +56,4 @@ INSERT INTO member VALUES (null, 'test6', 'test', 'test6@test.com', 'test6.jpg',
 INSERT INTO member VALUES (null, 'test7', 'test', 'test7@test.com', 'test7.jpg', 'テストです。', '4,6');    
 INSERT INTO member VALUES (null, 'test8', 'test', 'test8@test.com', 'test8.jpg', 'テストです。', '5');    
 INSERT INTO member VALUES (null, 'test9', 'test', 'test9@test.com', 'test9.jpg', 'テストです。', '1,2');    
-INSERT INTO member VALUES (null, 'test10', 'test', 'test10@test.com', 'test10.jpg', 'テストです。', '4');    
+INSERT INTO member VALUES (null, 'test10', 'test', 'test10@test.com', 'test10.jpg', 'テストです。', '4');   

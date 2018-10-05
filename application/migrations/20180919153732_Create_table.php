@@ -68,6 +68,11 @@ class Migration_Create_table extends  CI_Migration {
                                 'constraint' => '100',
                                 'null' => TRUE
                         ),
+                        'm_photo' => array(
+                                'type' => 'varchar',
+                                'constraint' => '100',
+                                'null' => TRUE
+                        ),
                         'p_text' => array(
                                 'type' => 'varchar',
                                 'constraint' => '500',
@@ -75,12 +80,6 @@ class Migration_Create_table extends  CI_Migration {
                         'p_category' => array(
                                 'type' => 'char',
                                 'constraint' => '6'
-                        ),
-                        'like_num' => array(
-                                'type' => 'int',
-                                'constraint' => '11',
-                                'null' => TRUE,
-                                'default' => '0'
                         ),
                         'p_date' => array(
                                 'type' => 'datetime'
@@ -90,7 +89,7 @@ class Migration_Create_table extends  CI_Migration {
                 $this->dbforge->create_table('post');
                 echo 'postを作成しました。'.PHP_EOL;
                 $sql = <<<SQL
-                        ALTER TABLE post ADD CONSTRAINT post_fk FOREIGN KEY (id) REFERENCES member(id) ON DELETE CASCADE
+                        ALTER TABLE post ADD CONSTRAINT post_fk_1 FOREIGN KEY (id) REFERENCES member(id) ON DELETE CASCADE
 SQL;
                 $this->db->query($sql);
                 echo 'postの外部キーを追加しました。'.PHP_EOL;
