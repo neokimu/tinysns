@@ -8,8 +8,7 @@
     <body>
         <h1>join</h1>
         <?=validation_errors()?>
-        <?=form_open_multipart(base_url().'join/join_validation')?>
-        
+        <form action="<?=base_url()?>join/join_validation" method="POST" enctype="multipart/form-data">        
         <label for="id">id</label>    
         <input type="text" id="id" name="id" value="<?=set_value('id')?>"  placeholder="id">
         <br>
@@ -37,6 +36,6 @@
         <input type="checkbox" name="m_category[]" value="6">shopping
         <br>
         <input type="submit" value="join">        
-    </form>  
+    </form>
     </body>
 </html>
