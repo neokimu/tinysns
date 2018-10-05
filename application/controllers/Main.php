@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Main extends CI_Controller {    
     
     public $data;
+    public $m_photo;
 
     public function __construct() 
     {    
@@ -22,17 +23,12 @@ class Main extends CI_Controller {
             $m_category = $this->regular();
             
             $this->data = $this->post_dao->view($m_category);
-            
+            $this->m_photo = $this->get_m_photo();
+     
             $this->load->view('main_view', $this->data);              
     }
-    
-    /**
-     * カテゴリーの文字列を正規表現への変換
-     *
-     * @param
-     *
-     * @return string
-     */
+       
+    // カテゴリーの文字列を正規表現への変換  
     public function regular() 
     {
         $m_category = $this->session->userdata('m_category');
@@ -49,4 +45,15 @@ class Main extends CI_Controller {
         }        
         return $regulared .= $last_category;
     }
+    
+    public function get_m_photo()
+    {   
+        $result = $this->post_dao->get_photo($this->session->userdata('id'));
+            
+        if($result['m_photo'] == ''){
+            return $result['m_photo'] = 'default.jpg';
+        }
+        return $result['m_photo'];   
+    } 
 }
+
