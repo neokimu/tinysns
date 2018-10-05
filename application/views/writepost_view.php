@@ -36,14 +36,17 @@
     <div class="content pure-u-1 pure-u-md-3-4">
         <h1>write post</h1>
         <?php echo validation_errors(); ?>
+        <form action="<?=base_url()?>writepost/post_validation" method="POST" enctype="multipart/form-data">
         <form method="post" action="writepost/write">
             <label for="title">title</label>  
             <input type="text" id="title" name="title" value="<?php echo set_value('title')?>">
+            <label for="m_photo">post_photo</label>
+            <input type="file" id="p_photo" name="p_photo" value="p_photo" placeholder="p_photo">
             <br><br>
             <textarea id="p_text" name="p_text" value="<?php echo set_value('p_text')?>" rows="10" cols="80">
             </textarea>
             <script>
-                CKEDITOR.replace( 'p_text' );
+                CKEDITOR.replace('p_text');
             </script>
             <br>
             <label for="p_category">category</label>    
