@@ -18,7 +18,7 @@ class Login extends CI_Controller {
         
         if($result != FALSE)
         {
-            // login 成功         
+            // login成功の場合, sessionにid, categoryを保存する          
             $session_data = array(
                                 'id' => $result['id'],
                                 'm_category' => $result['m_category']
@@ -27,7 +27,7 @@ class Login extends CI_Controller {
             
             redirect('main');         
         } else {
-           // login 失敗
+           // login失敗の場合, 最初の画面に戻る
            redirect(base_url());
         }                  
     }       
