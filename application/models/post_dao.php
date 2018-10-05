@@ -71,12 +71,29 @@ class Post_dao extends CI_Model
      */
     public function write($post_array) 
     {
-        $sql = "INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, null, ?)";
+        $sql = "INSERT INTO post VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
         $result = $this->db->query($sql, $post_array);
               
         if($result != NULL) {    
             return TRUE;                
         }   
         return FALSE;
+    }
+    
+    /**
+     * ユーザの画像を習得
+     *
+     * @param $id
+     *
+     * @return array $result
+     */
+    public function get_photo($id)
+    {                 
+        $sql = "select m_photo from member where id= ?";
+        $query = $this->db->query($sql, $id);
+        
+        $result = $query->row_array();
+            
+        return $result;
     }
 }
